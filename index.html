@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-ai-enhanced="true">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, shrink-to-fit=no" />
+    
+    <title>Tham Platform – AI-Powered Professional Matching & Moodle Integration</title>
+    <meta name="description" content="Connect with top professionals using neural matching algorithms and Moodle‑powered rankings. Real‑time AI assistant, voice commands, and smart recommendations." />
+    <meta name="keywords" content="AI matching, professional network, Moodle integration, career platform, smart search, voice assistant, Tham AI" />
+    <meta name="author" content="Tham AI Labs" />
+    <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e1e2f" media="(prefers-color-scheme: dark)" />
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Tham Platform – AI-Powered Professional Matching" />
+    <meta property="og:description" content="Intelligent career platform with real‑time AI assistant, Moodle sync, and smart connections." />
+    <meta property="og:image" content="/tham-og-image.png" />
+    <meta property="og:url" content="https://tham.ai" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tham Platform – AI-Powered Professional Matching" />
+    <meta name="twitter:description" content="Meet your AI career assistant. Voice commands, Moodle integration, and smart matching." />
+    
+    <!-- Icons & PWA -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preconnect & Prefetch for critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preload" href="/fonts/bootstrap-icons.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="modulepreload" href="/src/main.jsx" />
+    <link rel="prefetch" href="/src/pages/profile-owner/Dashboard.jsx" as="script" />
+    <link rel="prefetch" href="/src/pages/client/Dashboard.jsx" as="script" />
+    <link rel="prefetch" href="/src/components/ai/AIChatAssistant.jsx" as="script" />
+    
+    <!-- AI Theme Initializer (no FOUC) -->
+    <script>
+      (function() {
+        try {
+          const stored = localStorage.getItem('ai_theme_preference');
+          const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          let theme = stored === 'dark' || stored === 'light' ? stored : (systemDark ? 'dark' : 'light');
+          const root = document.documentElement;
+          root.setAttribute('data-theme', theme);
+          root.style.colorScheme = theme;
+          if (theme === 'dark') root.classList.add('dark-mode');
+          else root.classList.remove('dark-mode');
+          if (!stored) localStorage.setItem('ai_theme_preference', theme);
+        } catch(e) { /* silent fallback */ }
+      })();
+    </script>
+    
+    <!-- Critical CSS (includes loader and design tokens) -->
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --primary-color: #646cff;
+        --primary-hover: #535bf2;
+        --secondary-color: #61dafb;
+        --text-primary: #213547;
+        --text-secondary: #4b5563;
+        --background: #ffffff;
+        --card-bg: #f9f9f9;
+        --border-color: #e2e8f0;
+        --border-radius: 12px;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        --bg-base: #f8fafc;
+      }
+      :root[data-theme="dark"] {
+        --primary-color: #818cf8;
+        --primary-hover: #a5b4fc;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --background: #0f172a;
+        --card-bg: #1e293b;
+        --border-color: #334155;
+        --bg-base: #020617;
+      }
+      body, html { width: 100%; height: 100%; background: var(--bg-base); font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+      .ai-loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--bg-base);
+        z-index: 9999;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(2px);
+      }
+      .ai-orbital-system {
+        width: 96px;
+        height: 96px;
+        position: relative;
+        animation: ai-rotate 3s linear infinite;
+        margin-bottom: 2rem;
+      }
+      .ai-core {
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, var(--primary-color), #06b6d4);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 20px var(--primary-color);
+        animation: core-pulse 1.8s ease-in-out infinite;
+      }
+      .ai-orbit {
+        position: absolute;
+        border: 2px solid transparent;
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: ai-spin 2.4s linear infinite;
+      }
+      .ai-orbit-1 { width: 72px; height: 72px; top: 12px; left: 12px; animation-duration: 3.2s; }
+      .ai-orbit-2 { width: 48px; height: 48px; top: 24px; left: 24px; animation-duration: 2s; animation-direction: reverse; border-top-color: var(--secondary-color); }
+      .ai-orbit-3 { width: 96px; height: 96px; top: 0; left: 0; animation-duration: 4.8s; opacity: 0.6; }
+      .ai-loading-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-bottom: 0.5rem;
+      }
+      .ai-loading-sub {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .ai-progress-bar {
+        width: 280px;
+        height: 4px;
+        background: var(--border-color);
+        border-radius: 100px;
+        margin-top: 1.5rem;
+        overflow: hidden;
+      }
+      .ai-progress-fill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        border-radius: 100px;
+        transition: width 0.2s linear;
+      }
+      .ai-tip-message {
+        margin-top: 1.8rem;
+        font-size: 0.85rem;
+        background: var(--card-bg);
+        padding: 0.6rem 1.2rem;
+        border-radius: 40px;
+        color: var(--text-secondary);
+        box-shadow: var(--shadow-sm);
+        backdrop-filter: blur(4px);
+        max-width: 90%;
+        text-align: center;
+      }
+      @keyframes ai-rotate { 100% { transform: rotate(360deg); } }
+      @keyframes ai-spin { 100% { transform: rotate(360deg); } }
+      @keyframes core-pulse {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .ai-orbital-system, .ai-orbit, .ai-core { animation: none; }
+      }
+      @media (max-width: 640px) {
+        .ai-loading-title { font-size: 1.25rem; }
+        .ai-progress-bar { width: 200px; }
+      }
+      .ai-loader-container.fade-out { opacity: 0; pointer-events: none; visibility: hidden; }
+    </style>
+  </head>
+  
+  <body>
+    <noscript>
+      <div style="text-align: center; padding: 3rem; background: #1e1e2f; color: white; min-height: 100vh;">
+        <h1 style="color: #ef4444;">⚠️ JavaScript Required</h1>
+        <p>Tham Platform's AI features require JavaScript. Please enable it to continue.</p>
+        <div style="margin-top: 2rem;">🤖 <strong>AI Assistant Offline</strong></div>
+      </div>
+    </noscript>
+    
+    <div id="root">
+      <div id="ai-initial-loader" class="ai-loader-container" aria-label="Loading Tham AI Platform">
+        <div class="ai-orbital-system">
+          <div class="ai-core"></div>
+          <div class="ai-orbit ai-orbit-1"></div>
+          <div class="ai-orbit ai-orbit-2"></div>
+          <div class="ai-orbit ai-orbit-3"></div>
+        </div>
+        <div class="ai-loading-title">Initializing Tham AI Ecosystem</div>
+        <div class="ai-loading-sub">
+          <span id="loading-phase-text">🧠 Activating neural matching</span>
+          <span id="moodle-status-badge" style="font-size:0.7rem; background:rgba(100,108,255,0.2); padding:2px 8px; border-radius:20px;">Moodle sync ready</span>
+        </div>
+        <div class="ai-progress-bar">
+          <div id="ai-progress-fill" class="ai-progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="ai-tip-message" id="ai-tip-message">💡 AI Tip: Connect Moodle to boost your professional ranking by 300%</div>
+      </div>
+    </div>
+    
+    <!-- Loader simulation (safe, no import.meta) -->
+    <script>
+      (function() {
+        const loader = document.getElementById('ai-initial-loader');
+        if (!loader) return;
+        const progressFill = document.getElementById('ai-progress-fill');
+        const phaseText = document.getElementById('loading-phase-text');
+        const moodleBadge = document.getElementById('moodle-status-badge');
+        const tipMessage = document.getElementById('ai-tip-message');
+        
+        const phases = [
+          { text: '🧠 AI System Initializing...', progress: 8, moodle: '🔄 syncing', tip: '🤖 AI Tip: Neural engine adapts to your preferences.' },
+          { text: '📊 Analyzing Your Preferences...', progress: 22, moodle: '📚 connecting', tip: '🎯 Smart Search: Use AI‑powered filters.' },
+          { text: '⚙️ Loading AI Components...', progress: 38, moodle: '🔗 linking', tip: '🚀 Pro Feature: Voice commands – "Hey Tham".' },
+          { text: '🔄 Syncing Moodle Data...', progress: 54, moodle: '✅ active', tip: '📈 Complete Moodle courses to boost visibility by 200%.' },
+          { text: '🎙️ Optimizing Voice Interface...', progress: 70, moodle: '⚡ live', tip: '🎤 Say "Tham help" for voice navigation.' },
+          { text: '✨ Personalizing Your Dashboard', progress: 86, moodle: '🌟 integrated', tip: '💼 Set availability to "immediate" for 3x more connections.' },
+          { text: '🚀 Finalizing AI Setup', progress: 98, moodle: '🎉 ready', tip: '🎨 Customize your dashboard for your workflow.' }
+        ];
+        
+        let idx = 0;
+        const interval = setInterval(() => {
+          if (idx < phases.length) {
+            const p = phases[idx];
+            if (progressFill) progressFill.style.width = p.progress + '%';
+            if (phaseText) phaseText.innerText = p.text;
+            if (moodleBadge) moodleBadge.innerHTML = p.moodle;
+            if (tipMessage) tipMessage.innerHTML = p.tip;
+            idx++;
+          } else {
+            if (progressFill && progressFill.style.width !== '100%') progressFill.style.width = '100%';
+            clearInterval(interval);
+          }
+        }, 900);
+        
+        const rootNode = document.getElementById('root');
+        const observer = new MutationObserver(() => {
+          if (!document.getElementById('ai-initial-loader')) {
+            clearInterval(interval);
+            observer.disconnect();
+          }
+        });
+        if (rootNode) observer.observe(rootNode, { childList: true, subtree: false });
+      })();
+    </script>
+    
+    <!-- Main React entry (type="module") -->
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Service Worker registration (safe, no import.meta) -->
+    <script>
+      if ('serviceWorker' in navigator && window.location.hostname !== 'localhost') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registration failed:', err));
+        });
+      }
+    </script>
+    
+    <meta http-equiv="Permissions-Policy" content="microphone=(self), camera=(), geolocation=(self)" />
+  </body>
+</html>

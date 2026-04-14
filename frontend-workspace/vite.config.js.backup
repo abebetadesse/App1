@@ -1,0 +1,44 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import compression from 'vite-plugin-compression';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    compression({ algorithm: 'gzip', ext: '.gz', threshold: 1024 }),
+  ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['react-bootstrap', 'react-hot-toast', 'react-helmet-async'],
+          'chart-vendor': ['chart.js', 'react-chartjs-2'],
+          'icon-vendor': ['lucide-react'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+    sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info'],
+      },
+    },
+    target: 'es2015',
+  },
+  server: {
+    port: 5153,
+    open: true,
+  },
+  preview: {
+    port: 4173,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'react-bootstrap'],
+    exclude: ['lucide-react'], // avoid bundling issues
+  },
+});

@@ -1,0 +1,14 @@
+export const initializeErrorReporting = async () => {};
+export const initializeAnalytics = async () => {};
+export const initializeRealTimeServices = async () => {};
+export const initializeMoodleSync = async () => {};
+export const initializeFeatureFlags = async () => {};
+export const initializeConnectionManager = async () => {};
+export const initializeVoiceAssistant = async () => {};
+export const initializePerformanceOptimizer = async () => {};
+export const initializeSearchOptimization = async () => {};
+export const syncMoodleCourses = async () => {};
+export const trackPageView = () => {};
+export const trackEvent = () => {};
+export const trackPerformance = () => {};
+export default { init: () => {} };

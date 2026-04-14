@@ -1,0 +1,38 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    open: true,
+    strictPort: false,
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'bootstrap-vendor': ['react-bootstrap', 'bootstrap', 'bootstrap-icons'],
+          'ui-vendor': ['react-hot-toast', 'react-helmet-async', 'lucide-react'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+    sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info'],
+      },
+    },
+    target: 'es2015',
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'react-bootstrap'],
+    exclude: ['lucide-react'],
+  },
+  // Remove deprecated esbuild and rollupOptions warnings
+});

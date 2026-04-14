@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-ai-enhanced="true">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <!-- Enhanced Viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  
+  <!-- Primary Meta Tags -->
+  <title>Tham Platform – AI-Powered Professional Matching & Moodle Integration</title>
+  <meta name="description" content="Connect with top professionals using AI matching and Moodle‑powered rankings. Find the perfect service provider for your project." />
+  <meta name="keywords" content="professional matching, service marketplace, Moodle LMS, AI matching, client connections, course ranking" />
+  <meta name="author" content="Tham Platform" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tham Platform – AI-Powered Professional Matching" />
+  <meta property="og:description" content="Find qualified professionals through AI matching and Moodle rankings." />
+  <meta property="og:image" content="/social-preview.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://thamplatform.com" />
+  <meta property="og:site_name" content="Tham Platform" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tham Platform – AI Professional Matching" />
+  <meta name="twitter:description" content="AI-powered professional matching with Moodle LMS integration" />
+  <meta name="twitter:image" content="/social-preview.jpg" />
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#6366f1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1e1b4b" media="(prefers-color-scheme: dark)" />
+  
+  <!-- Preconnects for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="dns-prefetch" href="https://api.thamplatform.com" />
+  
+  <!-- Critical Inline CSS – Optimized & Cleaned -->
+  <style>
+    /* ----- Design Tokens (matching Tailwind config) ----- */
+    :root {
+      --primary-50: #eef2ff;
+      --primary-600: #4f46e5;
+      --primary-700: #4338ca;
+      --accent-500: #ec4899;
+      --success-500: #22c55e;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      
+      --bg-light: #f9fafb;
+      --bg-dark: #111827;
+      --text-light: #1f2937;
+      --text-dark: #f3f4f6;
+      
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --radius-xl: 0.75rem;
+      --radius-2xl: 1rem;
+      
+      --transition: all 0.2s ease;
+    }
+
+    /* ----- Reset & Base ----- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .dark body { background: var(--bg-dark); color: var(--text-dark); }
+
+    /* ----- AI Loader (Smooth & Professional) ----- */
+    .app-loading {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    .app-loading.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-content {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius-2xl);
+      padding: 2.5rem 2rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .loader-spinner {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+    .spinner-ring {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.2);
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loader-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .loader-subtitle {
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .feature-item {
+      background: rgba(255,255,255,0.15);
+      border-radius: var(--radius-xl);
+      padding: 0.75rem 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .progress-container {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    .progress-bar-bg {
+      height: 6px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: white;
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .moodle-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(34,197,94,0.2);
+      border: 1px solid rgba(34,197,94,0.4);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ----- No-JS Fallback ----- */
+    .no-js-message {
+      position: fixed;
+      inset: 0;
+      background: var(--gray-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      z-index: 10000;
+    }
+    .dark .no-js-message { background: var(--gray-900); }
+    .no-js-card {
+      max-width: 500px;
+      background: white;
+      border-radius: var(--radius-2xl);
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .dark .no-js-card { background: var(--gray-800); }
+
+    /* ----- Accessibility Skip Link ----- */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary-600);
+      color: white;
+      padding: 8px 16px;
+      z-index: 10001;
+      text-decoration: none;
+      border-radius: 0 0 8px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ----- Reduced Motion ----- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; }
+    }
+
+    /* ----- Mobile Tweaks ----- */
+    @media (max-width: 640px) {
+      .loader-content { padding: 1.5rem; }
+      .loader-title { font-size: 1.5rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Tham Platform",
+    "description": "AI-powered professional service marketplace with Moodle LMS integration",
+    "url": "https://thamplatform.com",
+    "applicationCategory": "BusinessApplication",
+    "featureList": ["AI Matching", "Moodle Integration", "Real-time Notifications"]
+  }
+  </script>
+</head>
+<body class="antialiased">
+  <!-- Skip Link -->
+  <a href="#root" class="skip-link">Skip to main content</a>
+
+  <!-- AI Loading Experience -->
+  <div class="app-loading" id="appLoading" role="status" aria-live="polite">
+    <div class="loader-content">
+      <div class="loader-spinner">
+        <div class="spinner-ring"></div>
+      </div>
+      <div class="loader-title">Tham AI Platform</div>
+      <div class="loader-subtitle">Preparing your intelligent workspace...</div>
+      
+      <div class="feature-grid">
+        <div class="feature-item">🤖 AI Matching</div>
+        <div class="feature-item">📚 Moodle Sync</div>
+        <div class="feature-item">⚡ Real-time</div>
+        <div class="feature-item">🎯 Smart Ranking</div>
+      </div>
+      
+      <div class="progress-container">
+        <div class="progress-bar-bg">
+          <div class="progress-fill" id="loadingProgress"></div>
+        </div>
+        <div class="progress-text">
+          <span>Loading modules</span>
+          <span id="progressPercentage">0%</span>
+        </div>
+      </div>
+      
+      <div class="moodle-badge" id="moodleSyncIndicator" style="display: none;">
+        <span>🔄</span>
+        <span>Connecting to Moodle LMS...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App Root -->
+  <div id="root" role="main"></div>
+
+  <!-- No-JS Fallback -->
+  <noscript>
+    <div class="no-js-message">
+      <div class="no-js-card">
+        <h2 style="color: #ef4444; margin-bottom: 1rem;">JavaScript Required</h2>
+        <p style="margin-bottom: 1.5rem;">Tham Platform needs JavaScript to provide AI matching and real-time features.</p>
+        <a href="https://www.enable-javascript.com/" style="background: #4f46e5; color: white; padding: 0.75rem 1.5rem; border-radius: 9999px; text-decoration: none; font-weight: 600;">Learn How to Enable</a>
+      </div>
+    </div>
+  </noscript>
+
+  <!-- Loader Control Script -->
+  <script>
+    (function() {
+      const loader = document.getElementById('appLoading');
+      const progressFill = document.getElementById('loadingProgress');
+      const percentSpan = document.getElementById('progressPercentage');
+      const moodleIndicator = document.getElementById('moodleSyncIndicator');
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        if (progress < 90) {
+          progress += Math.random() * 15 + 5;
+          if (progress > 90) progress = 90;
+          progressFill.style.width = progress + '%';
+          if (percentSpan) percentSpan.textContent = Math.round(progress) + '%';
+        }
+        if (progress >= 30 && moodleIndicator) {
+          moodleIndicator.style.display = 'inline-flex';
+        }
+      }, 200);
+
+      // Hide loader when React mounts (root gets children)
+      const observer = new MutationObserver(() => {
+        if (document.getElementById('root').children.length > 0) {
+          clearInterval(interval);
+          progressFill.style.width = '100%';
+          if (percentSpan) percentSpan.textContent = '100%';
+          setTimeout(() => {
+            loader.classList.add('hidden');
+            setTimeout(() => loader.remove(), 500);
+          }, 400);
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.getElementById('root'), { childList: true, subtree: true });
+
+      // Fallback timeout
+      setTimeout(() => {
+        if (loader && !loader.classList.contains('hidden')) {
+          console.warn('Loader fallback triggered');
+          loader.classList.add('hidden');
+        }
+      }, 12000);
+
+      // Theme detection
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', prefersDark);
+    })();
+  </script>
+
+  <!-- Main Entry -->
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import React from 'react';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { AuthProvider } from '../contexts/AuthContext';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { ThemeProvider } from '../contexts/ThemeContext';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { NotificationProvider } from '../contexts/NotificationContext';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { FeatureFlagProvider } from '../contexts/FeatureFlagContext';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { PerformanceProvider } from '../contexts/PerformanceContext';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { MoodleSyncProvider } from '../contexts/MoodleSyncContext';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { ConnectionProvider } from '../contexts/ConnectionContext';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { VisibilityProvider } from '../contexts/VisibilityContext';
+import { VoiceAssistantProvider } from "../contexts/VoiceAssistantContext";
+import { KeyboardShortcutsProvider } from '../contexts/KeyboardShortcutsContext';
+
+export const AppProviders = ({ children }) => {
+  return (
+    <FeatureFlagProvider>
+      <ThemeProvider>
+        <NotificationProvider>
+          <PerformanceProvider>
+            <MoodleSyncProvider>
+              <ConnectionProvider>
+                  <VoiceAssistantProvider>
+                <AuthProvider>
+                  <VisibilityProvider>
+                    <KeyboardShortcutsProvider>
+                      {children}
+                    </KeyboardShortcutsProvider>
+                  </VisibilityProvider>
+                </AuthProvider>
+                  </VoiceAssistantProvider>
+              </ConnectionProvider>
+            </MoodleSyncProvider>
+          </PerformanceProvider>
+        </NotificationProvider>
+      </ThemeProvider>
+    </FeatureFlagProvider>
+  );
+};

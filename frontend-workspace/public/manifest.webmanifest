@@ -1,0 +1,10 @@
+{
+  "name": "Tham AI Platform",
+  "short_name": "Tham AI",
+  "description": "AI-powered professional matching with Moodle integration",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#646cff",
+  "background_color": "#ffffff",
+  "icons": [{ "src": "/vite.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
